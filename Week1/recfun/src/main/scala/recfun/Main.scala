@@ -9,8 +9,7 @@ object Main {
       println()
     }
 
-    println("Balance")
-    println(balance("(if (zero? x) max (/ 1 x))".toList))
+   print(countChange(4, List(1,2)))
   }
 
   /**
@@ -32,12 +31,17 @@ object Main {
         if(char == '(') 1 else -1
       }
 
-      if(loop(0, chars.filter(char => char == '(' || char == ')')) == 0) true else false
+      loop(0, chars.filter(char => char == '(' || char == ')')) == 0
 
     }
   
   /**
    * Exercise 3
    */
-    def countChange(money: Int, coins: List[Int]): Int = ???
+    def countChange(money: Int, coins: List[Int]): Int = {
+      if(money == 0) 1
+      else if (money > 0 && coins.nonEmpty)
+        countChange(money - coins.head, coins) + countChange(money, coins.tail)
+      else 0
+    }
   }
